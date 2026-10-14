@@ -19,6 +19,9 @@ points; higher overall accuracy does not imply better balanced classification.
 [One-page PDF](assets/overview.pdf) · [Concise overview](OVERVIEW.md) ·
 [Detailed test results](results/comparison.json) · [Experiment record](results/experiment.json)
 
+**Trained adapter:** [Qwen3.5-0.8B-ESCI-LoRA on Hugging Face](https://huggingface.co/tcabanski/Qwen3.5-0.8B-ESCI-LoRA),
+with the best checkpoint, model card, and frozen inference example.
+
 ## Method and evaluation
 
 The backbone is frozen; **10.82M LoRA parameters** are trained on language-model
@@ -98,7 +101,9 @@ the highest validation macro-F1 checkpoint. Scores are in `history.json`.
 
 ## Use a trained checkpoint
 
-Model weights are not bundled in this code repository. After training, score
+Model weights are distributed separately on
+[Hugging Face](https://huggingface.co/tcabanski/Qwen3.5-0.8B-ESCI-LoRA);
+follow its model card to download and use the released adapter. After training, score
 synthetic example records with the checkpoint's exact prompt and truncation:
 
 ```bash
