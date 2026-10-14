@@ -1,0 +1,355 @@
+{
+  "original_training_config": {
+    "model": {
+      "name": "Qwen/Qwen3.5-0.8B-Base",
+      "revision": "f75361505deaead5ce6a4a25bd2f433cb1cd1ca3",
+      "dtype": "bfloat16",
+      "device": "cuda",
+      "kernel_backend": "auto"
+    },
+    "data": {
+      "directory": "data/extended",
+      "validation_fraction": 0.1,
+      "seed": 42
+    },
+    "prompt": {
+      "max_length": 256,
+      "order": [
+        "E",
+        "S",
+        "C",
+        "I"
+      ]
+    },
+    "training": {
+      "mode": "jev",
+      "seed": 42,
+      "batch_size": 4,
+      "accumulation_steps": 8,
+      "epochs": 6,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.01,
+      "warmup_fraction": 0.03,
+      "patience": 3,
+      "max_grad_norm": 1.0,
+      "gradient_checkpointing": true,
+      "lora_r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "min_delta": 0.005,
+      "validation_interval_seconds": 21600,
+      "checkpoint_interval_seconds": 3600,
+      "retain_validation_checkpoints": true,
+      "early_stop_min_training_seconds": 64800,
+      "stop_at_validation_macro_f1": 0.5748,
+      "deadline_utc": "2026-10-13T05:00:00+00:00"
+    },
+    "evaluation": {
+      "batch_size": 4,
+      "bootstrap_samples": 200
+    }
+  },
+  "training_environment": {
+    "python": "3.13.12",
+    "packages": {
+      "torch": "2.10.0",
+      "transformers": "5.10.2",
+      "peft": "0.18.1",
+      "numpy": "2.3.5",
+      "scikit-learn": "1.8.0",
+      "fla-core": "0.5.2",
+      "causal-conv1d": null,
+      "triton": "3.6.0",
+      "einops": "0.8.1"
+    },
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "training_result": {
+    "best_validation_macro_f1": 0.5570318282541258,
+    "test_evaluated": false,
+    "state": {
+      "next_epoch": 3,
+      "best_macro_f1": 0.5570318282541258,
+      "bad_epochs": 3,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.7190663693445579,
+          "validation_macro_f1": 0.5486758651195482,
+          "global_update": 3300,
+          "epoch_complete": false
+        },
+        {
+          "epoch": 1,
+          "train_loss": 0.6530807717147556,
+          "validation_macro_f1": 0.5319498114401958,
+          "global_update": 6324,
+          "epoch_complete": true
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.4854279851712351,
+          "validation_macro_f1": 0.5570318282541258,
+          "global_update": 9603,
+          "epoch_complete": false
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.4835354272779363,
+          "validation_macro_f1": 0.5562578570141528,
+          "global_update": 12648,
+          "epoch_complete": true
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.3695613729143081,
+          "validation_macro_f1": 0.5558793069463016,
+          "global_update": 15949,
+          "epoch_complete": false
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.3732524314497115,
+          "validation_macro_f1": 0.5517523388197131,
+          "global_update": 18972,
+          "epoch_complete": true
+        }
+      ],
+      "next_batch": 0,
+      "epoch_loss": 0.0,
+      "global_update": 18972,
+      "training_seconds_total": 124309.52614314968,
+      "seconds_since_validation": 0.0,
+      "patience_best": 0.5570318282541258,
+      "completed_loss": 0.3732524314497115,
+      "stop_reason": "validation_plateau"
+    }
+  },
+  "dataset_source": {
+    "repository": "https://github.com/amazon-science/esci-data",
+    "revision": "7916cdf6ab75a462e77f20ab40428a10923998d5",
+    "license": "Apache-2.0",
+    "sha256": {
+      "shopping_queries_dataset_examples.parquet": "4a735b693b4a424a6fc67f5be6e4c811495c488bbf66d02a602d308b2744263a",
+      "shopping_queries_dataset_products.parquet": "25124442d064d64b26f74082d6fa09438d679efc0c183cf28d19064a2b65a265",
+      "LICENSE": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b",
+      "NOTICE": "d4290ed64c2edd0fce1d84e3f9dfb2881240fe534def76b8cd29ed6af683e287"
+    },
+    "urls": {
+      "shopping_queries_dataset_examples.parquet": "https://media.githubusercontent.com/media/amazon-science/esci-data/7916cdf6ab75a462e77f20ab40428a10923998d5/shopping_queries_dataset/shopping_queries_dataset_examples.parquet",
+      "shopping_queries_dataset_products.parquet": "https://media.githubusercontent.com/media/amazon-science/esci-data/7916cdf6ab75a462e77f20ab40428a10923998d5/shopping_queries_dataset/shopping_queries_dataset_products.parquet",
+      "LICENSE": "https://raw.githubusercontent.com/amazon-science/esci-data/7916cdf6ab75a462e77f20ab40428a10923998d5/LICENSE",
+      "NOTICE": "https://raw.githubusercontent.com/amazon-science/esci-data/7916cdf6ab75a462e77f20ab40428a10923998d5/NOTICE"
+    }
+  },
+  "subset_manifest": {
+    "purpose": "query-grouped pilot; not a full official ESCI evaluation",
+    "test_evaluation_permitted": false,
+    "seed": 42,
+    "parent_manifest_sha256": "658afed7e94b2f5439cb7b91a0b37747177ce24fd9999fd9f62d229abe7b38e8",
+    "train_groups_per_locale": 3000,
+    "validation_groups_per_locale": 300,
+    "splits": {
+      "train": {
+        "rows": 202359,
+        "classes": {
+          "E": 125383,
+          "S": 47555,
+          "I": 22040,
+          "C": 7381
+        },
+        "locales": {
+          "jp": 73709,
+          "es": 70479,
+          "us": 58171
+        },
+        "query_ids": 9118,
+        "query_groups": 8997,
+        "locale_classes": {
+          "C": {
+            "es": 3886,
+            "jp": 2229,
+            "us": 1266
+          },
+          "E": {
+            "es": 41296,
+            "jp": 43252,
+            "us": 40835
+          },
+          "I": {
+            "es": 8059,
+            "jp": 9370,
+            "us": 4611
+          },
+          "S": {
+            "es": 17238,
+            "jp": 18858,
+            "us": 11459
+          }
+        },
+        "text_character_quantiles": {
+          "query": {
+            "0.0": 1.0,
+            "0.5": 15.0,
+            "0.9": 30.0,
+            "0.99": 47.0,
+            "1.0": 154.0
+          },
+          "product_title": {
+            "0.0": 1.0,
+            "0.5": 85.0,
+            "0.9": 183.0,
+            "0.99": 200.0,
+            "1.0": 400.0
+          },
+          "product_brand": {
+            "0.0": 0.0,
+            "0.5": 7.0,
+            "0.9": 16.0,
+            "0.99": 28.0,
+            "1.0": 98.0
+          },
+          "product_color": {
+            "0.0": 0.0,
+            "0.5": 4.0,
+            "0.9": 13.0,
+            "0.99": 32.0,
+            "1.0": 100.0
+          },
+          "product_locale": {
+            "0.0": 2.0,
+            "0.5": 2.0,
+            "0.9": 2.0,
+            "0.99": 2.0,
+            "1.0": 2.0
+          },
+          "product_bullet_point": {
+            "0.0": 0.0,
+            "0.5": 310.0,
+            "0.9": 1222.0,
+            "0.99": 2051.0,
+            "1.0": 2503.0
+          },
+          "product_description": {
+            "0.0": 0.0,
+            "0.5": 0.0,
+            "0.9": 1318.0,
+            "0.99": 1972.0,
+            "1.0": 4950.0
+          }
+        }
+      },
+      "validation": {
+        "rows": 19458,
+        "classes": {
+          "E": 11737,
+          "S": 4577,
+          "I": 2249,
+          "C": 895
+        },
+        "locales": {
+          "es": 7036,
+          "jp": 6834,
+          "us": 5588
+        },
+        "query_ids": 911,
+        "query_groups": 898,
+        "locale_classes": {
+          "C": {
+            "es": 463,
+            "jp": 235,
+            "us": 197
+          },
+          "E": {
+            "es": 3944,
+            "jp": 4116,
+            "us": 3677
+          },
+          "I": {
+            "es": 881,
+            "jp": 815,
+            "us": 553
+          },
+          "S": {
+            "es": 1748,
+            "jp": 1668,
+            "us": 1161
+          }
+        },
+        "text_character_quantiles": {
+          "query": {
+            "0.0": 2.0,
+            "0.5": 15.0,
+            "0.9": 29.0,
+            "0.99": 47.0,
+            "1.0": 60.0
+          },
+          "product_title": {
+            "0.0": 1.0,
+            "0.5": 83.0,
+            "0.9": 181.0,
+            "0.99": 199.0,
+            "1.0": 285.0
+          },
+          "product_brand": {
+            "0.0": 0.0,
+            "0.5": 7.0,
+            "0.9": 16.0,
+            "0.99": 32.0,
+            "1.0": 53.0
+          },
+          "product_color": {
+            "0.0": 0.0,
+            "0.5": 4.0,
+            "0.9": 13.0,
+            "0.99": 31.0,
+            "1.0": 100.0
+          },
+          "product_locale": {
+            "0.0": 2.0,
+            "0.5": 2.0,
+            "0.9": 2.0,
+            "0.99": 2.0,
+            "1.0": 2.0
+          },
+          "product_bullet_point": {
+            "0.0": 0.0,
+            "0.5": 293.0,
+            "0.9": 1204.0,
+            "0.99": 2021.0,
+            "1.0": 2490.0
+          },
+          "product_description": {
+            "0.0": 0.0,
+            "0.5": 0.0,
+            "0.9": 1248.2999999999993,
+            "0.99": 1968.0,
+            "1.0": 3616.0
+          }
+        }
+      }
+    },
+    "split_sha256": {
+      "train": "5fba3080aa3a8e1716ee08c2d187724057baf48e9c4c14c0fbaf88478a3c413d",
+      "validation": "e793d20b32bdd80a780260d45e100f25055432f64f429db8f70b3959a77c7787"
+    },
+    "prepared_audit": {
+      "exact_duplicate_pairs": 962,
+      "conflicting_label_pairs": 104,
+      "normalization": "NFKC + casefold + removal of punctuation/whitespace; no semantic similarity",
+      "cross_partition": {
+        "query_id": 0,
+        "normalized_query": 0,
+        "query_product": 0,
+        "query_product_across_locales": 0
+      }
+    }
+  },
+  "reproduction_notes": [
+    "The historical data preparation used pandas; the maintained implementation uses Polars. Row selection and order are verified; Parquet byte hashes can differ.",
+    "Validation was triggered by wall-clock training time, so checkpoint selection and stopping can vary by hardware and kernels.",
+    "The six-epoch cosine schedule must be retained even though training stopped after three epochs.",
+    "configs/reported.yaml omits the expired calendar deadline; all remaining training settings are retained."
+  ]
+}

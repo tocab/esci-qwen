@@ -1,0 +1,39 @@
+[project]
+name = "esci-jev"
+version = "0.1.0"
+description = "Reproducible ESCI candidate-normalized decision learning"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "torch==2.10.0",
+  "transformers==5.10.2",
+  "peft==0.18.1",
+  "accelerate==1.12.0",
+  "huggingface-hub==1.7.1",
+  "numpy==2.3.5",
+  "polars==2.0.0",
+  "pyarrow==23.0.1",
+  "scikit-learn==1.8.0",
+  "PyYAML==6.0.3",
+  "safetensors==0.7.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.0.2", "ruff==0.15.0"]
+gpu-kernels = ["fla-core==0.5.2", "einops==0.8.1"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
